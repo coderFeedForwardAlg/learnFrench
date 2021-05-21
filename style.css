@@ -1,0 +1,13 @@
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+canvas {
+  display: block;
+}
+
+button {
+  z-index: 2;
+  background-color: hsl(241, 81%, 48%);
+}
