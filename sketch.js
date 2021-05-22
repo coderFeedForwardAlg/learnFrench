@@ -15,28 +15,33 @@ let lastLoadedIndex = 0;
 
 function setup() {
     // basic set up 
-    canvis = createCanvas(windowWidth, windowHeight);
-    //canvis.position(0,0);
+  canvis = createCanvas(windowWidth, windowHeight);
+
   
   background(255, 0, 0);
 
       // kick off the loading callback proses 
-  for(let i =0; i < soundNames.length; i++){
-    img[i] = loadImage(imgNames[i], imageLoaded);
-  }
+  loadImg();
+}
+
+function loadImg(){
+  img.push(loadImage(imgNames[lastLoadedIndex], imageLoaded));
 }
 
     // call backs 
 function imageLoaded(){
   sound.push(loadSound(soundNames[lastLoadedIndex], soundLoaded));
+  console.log("lastLoadedIndex got incremented");
+  
 }
 
 
 function soundLoaded(){
-  
   cards.push(new Card(img[lastLoadedIndex],sound[lastLoadedIndex]));
+  
   lastLoadedIndex++;
-    
+  loadImg();
+  
 }
 
 
@@ -44,7 +49,6 @@ function draw(){
   if(cards.length > cardThatYourOn){
     cards[cardThatYourOn].display();
   }
-
 }
 
 
@@ -81,8 +85,6 @@ function Card(img,sound){
       this.E = createElement("Button",["hello"]);
       this.E.position(300,300);
       this.E.mousePressed(makeNois);
-      console.log("displayed");
-      
   }
   
     
